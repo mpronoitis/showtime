@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ShowTime
+  datasource:
+    url: jdbc:mysql://localhost:3306/showtime
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+application:
+  jwt:
+    expiration-millis: 604800000   # 7 days in millisecond
+    secret: 1qrwiQ+nexWboKl/w1YojAupZdPgyYDladgM/IMOhWuHBSTTHiV/Gf8cR04gy8dWmAPzw8mdmBh8IA16B18OAg==
+
+
+
