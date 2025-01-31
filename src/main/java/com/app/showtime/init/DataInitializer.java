@@ -48,6 +48,7 @@ public class DataInitializer implements CommandLineRunner {
         Permission permission4 = new Permission();
         Permission permission5 = new Permission();
 
+
         permission1.setName(Permission.ADD_MOVIE);
         permission2.setName(Permission.DELETE_MOVIE);
         permission3.setName(Permission.UPDATE_MOVIE);
@@ -60,12 +61,14 @@ public class DataInitializer implements CommandLineRunner {
         permissionRepository.save(permission4);
         permissionRepository.save(permission5);
 
+
         // Associate Role with Permissions
         RolePermission rolePermission1 = new RolePermission();
         RolePermission rolePermission2 = new RolePermission();
         RolePermission rolePermission3 = new RolePermission();
         RolePermission rolePermission4 = new RolePermission();
         RolePermission rolePermission5 = new RolePermission();
+
 
         rolePermission1.setPermission(permission1);
         rolePermission1.setRole(adminRole);

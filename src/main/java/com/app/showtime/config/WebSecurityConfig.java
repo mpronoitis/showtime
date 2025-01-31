@@ -1,11 +1,6 @@
 package com.app.showtime.config;
 
-import com.app.showtime.domain.Permission;
-import com.app.showtime.domain.Role;
-import com.app.showtime.domain.RolePermission;
-import com.app.showtime.domain.User;
 import com.app.showtime.enumeration.ErrorType;
-import com.app.showtime.enumeration.RoleTypeEnum;
 import com.app.showtime.error.exception.NotFoundException;
 import com.app.showtime.repository.PermissionRepository;
 import com.app.showtime.repository.RolePermissionsRepository;
@@ -15,13 +10,10 @@ import com.app.showtime.service.UserClaimsService;
 import com.app.showtime.service.utils.Utils;
 import com.app.showtime.shared.rest.model.ApiResponse;
 import com.app.showtime.utils.UserSpecification;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -35,10 +27,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import java.io.IOException;
-import java.security.Key;
-import java.util.Base64;
+
 
 @Configuration
 @RequiredArgsConstructor
@@ -93,65 +83,6 @@ public class WebSecurityConfig {
         authProvider.setUserDetailsService(username -> userClaimsService.getUserClaimsDTOByUserDomain(userRepository.findOne(UserSpecification.haveUsername(username)).orElseThrow(NotFoundException::new)) );
         return authProvider;
     }
-
-//    @Bean
-//    public CommandLineRunner initData(RoleRepository roleRepository) {
-//
-//        return args -> {
-//            // Retrieve or create roles
-//            Role userRole = roleRepository.findByName(RoleTypeEnum.USER.getText())
-//                    .orElseGet(() -> {
-//                        Role newUserRole = new Role(RoleTypeEnum.USER);
-//                        return roleRepository.save(newUserRole);
-//                    });
-//
-//            Role adminRole = roleRepository.findByName(RoleTypeEnum.ADMIN.getText())
-//                    .orElseGet(() -> {
-//                        Role newAdminRole = new Role(RoleTypeEnum.ADMIN);
-//                        return roleRepository.save(newAdminRole);
-//                    });
-//
-//            //Add Permissions to the DB
-//            Permission permission1 = new Permission();
-//            Permission permission2 = new Permission();
-//            Permission permission3 = new Permission();
-//            Permission permission4 = new Permission();
-//            permission1.setName(Permission.ADD_MOVIE);
-//            permission2.setName(Permission.DELETE_MOVIE);
-//            permission3.setName(Permission.UPDATE_MOVIE);
-//            permission4.setName(Permission.ELEVATE_USER);
-//
-//            permissionRepository.save(permission1);
-//            permissionRepository.save(permission2);
-//            permissionRepository.save(permission3);
-//            permissionRepository.save(permission4);
-//
-//            //Associate Role with permissions
-//
-//            RolePermission rolePermission1 = new RolePermission();
-//            RolePermission rolePermission2 = new RolePermission();
-//            RolePermission rolePermission3 = new RolePermission();
-//            RolePermission rolePermission4 = new RolePermission();
-//            rolePermission1.setPermission(permission1);
-//            rolePermission1.setRole(adminRole);
-//            rolePermission2.setPermission(permission2);
-//            rolePermission2.setRole(adminRole);
-//            rolePermission3.setPermission(permission3);
-//            rolePermission3.setRole(adminRole);
-//            rolePermission4.setPermission(permission4);
-//            rolePermission4.setRole(adminRole);
-//
-//            rolePermissionsRepository.save(rolePermission1);
-//            rolePermissionsRepository.save(rolePermission2);
-//            rolePermissionsRepository.save(rolePermission3);
-//            rolePermissionsRepository.save(rolePermission4);
-//
-//            //Create Regular User
-//
-//
-//
-//        };
-//    }
 
     @Bean
     GrantedAuthorityDefaults grantedAuthorityDefaults() {

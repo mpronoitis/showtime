@@ -22,6 +22,7 @@ public class Permission implements Serializable {
     public static final String ELEVATE_USER = "ELEVATE_USER";
     public static final String ADD_SHOWTIME = "ADD_SHOWTIME";
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
